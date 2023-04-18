@@ -1,15 +1,16 @@
 package com.mx.conectasalud.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import com.mx.conectasalud.repository.ClinicaRepository;
+import com.mx.conectasalud.model.Clinica;
 
-@Service
-@EnableMongoRepositories
-public class ClinicaService {
+public interface ClinicaService {
 
-	@Autowired
-	private ClinicaRepository clinicaRepository;
+	public List<Clinica> findAll();
+
+	public Clinica saveClinica(Clinica user);
+
+	public void updateClinica(Clinica user);
+
+	public void deleteClinica(String userId);
 }

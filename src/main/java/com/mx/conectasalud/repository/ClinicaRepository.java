@@ -1,12 +1,17 @@
 package com.mx.conectasalud.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import com.mx.conectasalud.model.Clinica;
 
-@Repository
-public interface ClinicaRepository extends MongoRepository<Clinica, String> {
+public interface ClinicaRepository {
 
-	public long count();
+	public List<Clinica> findAll();
+
+	public Clinica saveClinica(Clinica user);
+
+	public void updateClinica(Clinica user);
+
+	public void deleteClinica(String userId);
+
 }

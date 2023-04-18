@@ -4,8 +4,12 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      uri: mongodb://localhost/test
+      database: CONECTA_SALUD
+      username: develop
+      password: develop
   
 # HTTP Server
 server:
   port: 8081
+  servlet:
+     contextPath: /clinica

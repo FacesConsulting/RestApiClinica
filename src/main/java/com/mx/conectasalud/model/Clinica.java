@@ -10,9 +10,11 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@Document("clinica")
+@Document("CLINICA")
 public class Clinica {
 
 	@Id
 	private String id;
+	
+	private String nombre;
 }
