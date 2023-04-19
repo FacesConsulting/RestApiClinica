@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ConectaSaludApplication<conectasalud-clinica>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mx.conectasalud.ConectaSaludApplication",
+            "projectName": "conectasalud-clinica",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

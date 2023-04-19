@@ -2,11 +2,7 @@
 spring:
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: CONECTA_SALUD
-      username: develop
-      password: develop
+      uri: mongodb+srv://dylan:dylan@cluster0.mb8zbcw.mongodb.net/CONSULTA_YA?retryWrites=true&w=majority
   
 # HTTP Server
 server:
