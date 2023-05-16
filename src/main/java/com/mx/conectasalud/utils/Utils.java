@@ -1,11 +1,19 @@
 package com.mx.conectasalud.utils;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import com.mx.conectasalud.jwt.JWTGenerator;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mx.conectasalud.jwt.JWTGenerator;
+import com.tinify.Tinify;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Utils {
 
     private Utils() {
@@ -31,6 +39,21 @@ public class Utils {
             return jwt.generateJWT(mapa);
         } catch (Exception e) {
             return null;
+        }
+
+    }
+
+    public static byte[] imageProcessing(MultipartFile file) {
+        if (file == null) {
+            return new byte[0];
+        }
+
+        try {
+            log.info("procesando imagen");
+            byte[] souceData = file.getBytes();
+            return Tinify.fromBuffer(souceData).toBuffer();
+        } catch (IOException e) {
+            throw new IOError(e);
         }
 
     }

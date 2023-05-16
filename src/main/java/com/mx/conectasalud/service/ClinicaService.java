@@ -18,7 +18,7 @@ public interface ClinicaService {
 
 	public void deleteClinica(String userId);
 
-	public String registroClinica(MultipartFile logo, String data, String key, String iv ) throws CustomException;
+	public void registroClinica(MultipartFile logo, String data, String key, String iv ) throws CustomException;
 
 	public void sendMailTeamInvitation(EncryptedData encryptedData) throws CustomException;
 }

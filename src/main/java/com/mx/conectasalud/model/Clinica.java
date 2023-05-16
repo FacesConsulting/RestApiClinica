@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -30,5 +31,9 @@ public class Clinica {
 	private Direccion direccion;
 	@NotBlank
 	private String telefono;
+
+	@Field("logo")
+	private byte[] logo;
+	
 	private ArrayList<Puntuacion> listaPuntuacion; 
 }

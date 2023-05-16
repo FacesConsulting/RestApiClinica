@@ -62,7 +62,7 @@ public class ClinicaServiceImpl implements ClinicaService {
 	}
 
 	@Override
-	public String registroClinica(MultipartFile logo, String data, String key, String iv) throws CustomException {
+	public void registroClinica(MultipartFile logo, String data, String key, String iv) throws CustomException {
 		log.info("Registrando clinica");
 
 		try {
@@ -110,14 +110,17 @@ public class ClinicaServiceImpl implements ClinicaService {
 			Direccion direccion = new Direccion(codigoPostal, estado, municipio, colonia, calle, numeroExterior,
 					numeroInterior);
 
+			byte[] logoBytes = Utils.imageProcessing(logo);
+
 			Clinica clinica = new Clinica();
 			clinica.setId(idClinica);
 			clinica.setRazonSocial(razonSocial);
 			clinica.setRfc(rfc);
 			clinica.setDireccion(direccion);
 			clinica.setTelefono(telefono);
+			clinica.setLogo(logoBytes);
 
-			return idClinica;
+			clinicaRepository.saveClinic(clinica);
 
 		} catch (NullPointerException e) {
 			// TODO: handle exception

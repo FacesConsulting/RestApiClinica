@@ -21,7 +21,6 @@ public class TinifyConfig {
 
     @PostConstruct
     public void init() {
-        log.info("api key {}", tinifyApiKey);
         Tinify.setKey(tinifyApiKey);
     }
 }

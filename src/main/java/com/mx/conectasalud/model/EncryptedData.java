@@ -1,5 +1,7 @@
 package com.mx.conectasalud.model;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -38,8 +40,9 @@ public class EncryptedData {
      *                      datos.
      * @return una cadena que representa los datos descifrados.
      * @throws CustomException si se produce un error al descifrar los datos.
+     * @throws UnsupportedEncodingException
      */
-    public static String decryptData(String encryptedData, String key, String iv) throws CustomException {
+    public static String decryptData(String encryptedData, String key, String iv) throws CustomException{
         try {
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedData);
             byte[] encryptedKey = Base64.getDecoder().decode(key);
@@ -50,11 +53,11 @@ public class EncryptedData {
             IvParameterSpec ivParameterSpec = new IvParameterSpec(encryptedIv);
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);
             byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-            return new String(decryptedBytes);
+            return new String(decryptedBytes, StandardCharsets.UTF_8);
         } catch (IllegalArgumentException | NoSuchAlgorithmException | InvalidKeyException
                 | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException
-                | NoSuchPaddingException e) {
-            log.info(" message Exception {}",e.getMessage());
+                | NoSuchPaddingException  e) {
+            log.info(" message Exception {}", e.getMessage());
             throw new CustomException("Error al descifrar los datos", e);
         }
     }
