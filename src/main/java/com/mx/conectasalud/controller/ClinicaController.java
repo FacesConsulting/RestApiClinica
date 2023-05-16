@@ -40,8 +40,8 @@ public class ClinicaController {
                     "Ocurrio un error inesperado, intenta nuevamente más tarde."));
         }
 
-        return ResponseEntity.ok().body(JsonStringify.parseAlert("Mensaje Enviado", EnumSeverity.SUCCESS,
-                "Se te envio un correo electrónico a tu buzón, para continuar con el procedimiento."));
+        return ResponseEntity.status(201).body(JsonStringify.parseAlert("Hecho", EnumSeverity.SUCCESS,
+                "Clinica registrada correctamente."));
     }
 
     @CrossOrigin(origins = "*")
