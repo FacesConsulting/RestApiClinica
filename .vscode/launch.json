@@ -9,6 +9,16 @@
             "projectName": "conectasalud-clinica",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ConectaSaludApplication<conecta-ya-clinica>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mx.conectasalud.ConectaSaludApplication",
+            "projectName": "conecta-ya-clinica",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

@@ -1,7 +1,0 @@
-com\mx\conectasalud\ConectaSaludApplication.class
-com\mx\conectasalud\service\impl\ClinicaServiceImpl.class
-com\mx\conectasalud\repository\ClinicaRepository.class
-com\mx\conectasalud\repository\impl\ClinicaRepositoryImpl.class
-com\mx\conectasalud\model\Clinica.class
-com\mx\conectasalud\controller\ClinicaController.class
-com\mx\conectasalud\service\ClinicaService.class
