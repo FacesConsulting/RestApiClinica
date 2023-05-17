@@ -139,9 +139,17 @@ public class ClinicaServiceImpl implements ClinicaService {
 
 			String serializeData = EncryptedData.decryptData(data, key, iv);
 
+			String code = Utils.generateRandomCode();
+
 			Gson g = new Gson();
 			JsonObject jwtString = g.fromJson(serializeData, JsonObject.class);
 			String email = jwtString.get("correo").getAsString();
+
+			Usuario usuario = new Usuario();
+			usuario.setCodigo(code);
+			usuario.setCorreoElectronico(email);
+
+			String id = clinicaRepository.saveUser(usuario);
 
 			String siteURL = "http://localhost:3000/auth";
 			String toAddress = email;
@@ -167,9 +175,9 @@ public class ClinicaServiceImpl implements ClinicaService {
 			helper.setTo(toAddress);
 			helper.setSubject(subject);
 
-			String code = Utils.generateRandomCode();
+			
 
-			String verifyURL = siteURL + "/registerClinic?code=" + Utils.verifyToken(code);
+			String verifyURL = siteURL + "/registerClinic?code=" + Utils.verifyToken(code, email) + "&id=" + id;
 
 			content = content.replace("[[URL]]", verifyURL);
 			content = content.replace("[[CODE]]", code);

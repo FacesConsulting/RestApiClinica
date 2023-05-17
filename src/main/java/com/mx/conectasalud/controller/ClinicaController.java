@@ -50,7 +50,7 @@ public class ClinicaController {
         try {
             log.info("Recibiendo peticion para invitacion");
             clinicaService.sendMailTeamInvitation(encryptedData);
-        } catch (Exception e) {
+        } catch (CustomException e) {
             log.info("Ocurrio un error: {} ", e.getMessage());
             return ResponseEntity.internalServerError().body(JsonStringify.parseAlert("Lo sentimos", EnumSeverity.ERROR,
                     "Ocurrio un error inesperado, intenta nuevamente más tarde."));

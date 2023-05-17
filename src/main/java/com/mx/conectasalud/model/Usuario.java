@@ -26,17 +26,13 @@ public class Usuario {
     @Size(max = 50)
     @Email
     private String correoElectronico;
-    @NotBlank
     @Size(min = 8, max = 15)
     private String password;
-    @NotBlank
     private String rol;
-    @NotBlank
     private String plataforma;
     private String token;
-    @NotBlank
+    private String codigo;
     private boolean terminos;
-    @NotBlank
     private boolean servicios;
 
 }

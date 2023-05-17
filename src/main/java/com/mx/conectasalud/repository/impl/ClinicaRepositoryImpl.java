@@ -60,15 +60,12 @@ public class ClinicaRepositoryImpl implements ClinicaRepository {
 
 	@Override
 	public String saveUser(Usuario usuario) {
-		log.info("Llego a repository");
 		Query query = new Query();
 		query.addCriteria(Criteria.where(CORREO_ELECTRONICO).is(usuario.getCorreoElectronico().toLowerCase()));
 		if (mongoTemplate.exists(query, Usuario.class)) {
-			log.info("Usuario existente");
 			throw new RequestException(HttpStatus.CONFLICT, "Alerta", EnumSeverity.WARNING,
 					"El correo electrónico proporcionado ya ha sido dado de alta anteriormente");
 		}
-		log.info("Se guardo como usuario");
 		return mongoTemplate.insert(usuario).getId();
 	}
 
@@ -77,5 +74,4 @@ public class ClinicaRepositoryImpl implements ClinicaRepository {
 		log.info("Se guardo como clinica");
 		mongoTemplate.insert(clinica);
 	}
-
 }
