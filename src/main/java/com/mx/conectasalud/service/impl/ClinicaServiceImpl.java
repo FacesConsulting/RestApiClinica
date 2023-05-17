@@ -17,6 +17,7 @@ import com.mx.conectasalud.model.Clinica;
 import com.mx.conectasalud.model.Direccion;
 import com.mx.conectasalud.model.EncryptedData;
 import com.mx.conectasalud.model.Usuario;
+import com.mx.conectasalud.model.UsuarioTemporal;
 import com.mx.conectasalud.repository.ClinicaRepository;
 import com.mx.conectasalud.service.ClinicaService;
 import com.mx.conectasalud.service.StorageService;
@@ -145,11 +146,11 @@ public class ClinicaServiceImpl implements ClinicaService {
 			JsonObject jwtString = g.fromJson(serializeData, JsonObject.class);
 			String email = jwtString.get("correo").getAsString();
 
-			Usuario usuario = new Usuario();
+			UsuarioTemporal usuario = new UsuarioTemporal();
 			usuario.setCodigo(code);
 			usuario.setCorreoElectronico(email);
 
-			String id = clinicaRepository.saveUser(usuario);
+			String id = clinicaRepository.saveTemporaryUser(usuario);
 
 			String siteURL = "http://localhost:3000/auth";
 			String toAddress = email;

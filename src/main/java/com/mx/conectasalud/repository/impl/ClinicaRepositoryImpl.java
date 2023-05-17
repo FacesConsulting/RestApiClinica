@@ -1,11 +1,16 @@
 package com.mx.conectasalud.repository.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.SortOrder;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import com.mx.conectasalud.exception.RequestException;
 import com.mx.conectasalud.model.Clinica;
 import com.mx.conectasalud.model.Usuario;
+import com.mx.conectasalud.model.UsuarioTemporal;
 import com.mx.conectasalud.repository.ClinicaRepository;
 import com.mx.conectasalud.utils.EnumSeverity;
 
@@ -73,5 +79,18 @@ public class ClinicaRepositoryImpl implements ClinicaRepository {
 	public void saveClinic(Clinica clinica) {
 		log.info("Se guardo como clinica");
 		mongoTemplate.insert(clinica);
+	}
+
+	@Override
+	public String saveTemporaryUser(UsuarioTemporal usuarioTemporal) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where(CORREO_ELECTRONICO).is(usuarioTemporal.getCorreoElectronico().toLowerCase()));
+		if (mongoTemplate.exists(query, UsuarioTemporal.class)) {
+			throw new RequestException(HttpStatus.CONFLICT, "Alerta", EnumSeverity.WARNING,
+					"El correo electrónico proporcionado ya ha sido dado de alta anteriormente.");
+		}
+		mongoTemplate.indexOps(UsuarioTemporal.class).ensureIndex(new Index().on("createdAt", Sort.Direction.ASC).expire(3600));
+		usuarioTemporal.populateCreatedAt();
+		return mongoTemplate.insert(usuarioTemporal).getId();
 	}
 }

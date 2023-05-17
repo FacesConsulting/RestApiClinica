@@ -35,7 +35,7 @@ public class Utils {
         try {
             JWTGenerator jwt = new JWTGenerator();
             Map<String, String> mapa = new HashMap<>();
-            mapa.put("correoElectronico", email);
+            mapa.put("idTemporal", email);
             mapa.put("codigoVerificacion", code);
             return jwt.generateJWT(mapa);
         } catch (Exception e) {
