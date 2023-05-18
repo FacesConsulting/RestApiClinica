@@ -1,6 +1,5 @@
 package com.mx.conectasalud.service.impl;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -20,7 +19,6 @@ import com.mx.conectasalud.model.Usuario;
 import com.mx.conectasalud.model.UsuarioTemporal;
 import com.mx.conectasalud.repository.ClinicaRepository;
 import com.mx.conectasalud.service.ClinicaService;
-import com.mx.conectasalud.service.StorageService;
 import com.mx.conectasalud.utils.Utils;
 
 import jakarta.mail.MessagingException;
@@ -35,7 +33,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ClinicaServiceImpl implements ClinicaService {
 
 	private ClinicaRepository clinicaRepository;
-	private StorageService storageService;
 	private JavaMailSender mailSender;
 
 	@Override
@@ -124,7 +121,6 @@ public class ClinicaServiceImpl implements ClinicaService {
 			clinicaRepository.saveClinic(clinica);
 
 		} catch (NullPointerException e) {
-			// TODO: handle exception
 			log.error("Excepcion encontrada {}", e);
 			throw new CustomException(e.getMessage(), e.getCause());
 		}
@@ -178,7 +174,7 @@ public class ClinicaServiceImpl implements ClinicaService {
 
 			
 
-			String verifyURL = siteURL + "/registerClinic?code=" + Utils.verifyToken(code, email) + "&id=" + id;
+			String verifyURL = siteURL + "/registerClinic?code=" + Utils.verifyToken(id);
 
 			content = content.replace("[[URL]]", verifyURL);
 			content = content.replace("[[CODE]]", code);

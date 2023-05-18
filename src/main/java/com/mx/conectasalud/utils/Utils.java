@@ -31,12 +31,11 @@ public class Utils {
         return sb.toString();
     }
 
-    public static String verifyToken(String code, String email) {
+    public static String verifyToken(String id) {
         try {
             JWTGenerator jwt = new JWTGenerator();
             Map<String, String> mapa = new HashMap<>();
-            mapa.put("idTemporal", email);
-            mapa.put("codigoVerificacion", code);
+            mapa.put("id_temporal", id);
             return jwt.generateJWT(mapa);
         } catch (Exception e) {
             return null;

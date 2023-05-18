@@ -1,0 +1,31 @@
+# Spring db properties
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://dylan:dylan@cluster0.mb8zbcw.mongodb.net/CONSULTA_YA?retryWrites=true&w=majority
+  mail:
+    host: smtp.gmail.com
+    port: 25
+    username: consultayaadmin@consulta-ya.com.mx
+    password: zzlqxcectxwagdqe
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# HTTP Server
+server:
+  port: 8081
+  servlet:
+    contextPath: /clinica
+
+# Application
+app:
+  tinifyApiKey: 8n2PVDPHmfxDTCHdCqMBhk3277gtY7b0
+  cloudinary:
+    api:
+      cloud_name: storageconsultaya
+      key: 946294516624134
+      secret: i7xijrjqBndOxZRf9UXKaXNshNo
