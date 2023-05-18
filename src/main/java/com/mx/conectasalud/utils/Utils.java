@@ -49,7 +49,6 @@ public class Utils {
         }
 
         try {
-            log.info("procesando imagen");
             byte[] souceData = file.getBytes();
             return Tinify.fromBuffer(souceData).toBuffer();
         } catch (IOException e) {
