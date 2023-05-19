@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,6 +56,12 @@ public class Utils {
         } catch (IOException e) {
             throw new IOError(e);
         }
-
     }
+
+    public static boolean validarExpresionRegular(String cadena, String regex) {
+        Pattern patron = Pattern.compile(regex);
+        Matcher matcher = patron.matcher(cadena);
+        return matcher.matches();
+    }
+
 }
